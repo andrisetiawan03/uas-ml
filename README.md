@@ -29,7 +29,7 @@ Dengan adanya model machine learning ini di harapkan kita terhindar dari hal ter
 ## Data Understanding
 Proyek ini didasarkan pada dataset yang diambil dari kaggle perihal estimasi harga ponsel berdasarkan rincian spesifikasinya. Untuk dataset nya bisa di ambil disini<br>
 
-[Ponsel Price](https://www.kaggle.com/datasets/mohannapd/mobile-price-prediction).
+[Groceries Market Basket Dataset](https://www.kaggle.com/datasets/irfanasrullah/groceries).
 
 ### Variabel-variabel pada Mobile Price Prediction Dataset adalah sebagai berikut:
 Jenis inputan type data pada dataset ini yakni integer, kecuali untuk resolusi dan kecepatan CPU
@@ -158,4 +158,5 @@ Diperoleh tingkat akurasinya 91%, untuk model regreai linear saya rasa cocok unt
 
 ## Deployment
 [Link Streamlit untuk Project UAS](https://uas-ml-apriori.streamlit.app/)
-![alt text](https://github.com/andrisetiawan03/uts/blob/main/tampilan.png)
+![image](https://github.com/andrisetiawan03/uas-ml/assets/148999404/c215c98e-c02a-4c5f-b749-6ba8ce6893c3)
+
