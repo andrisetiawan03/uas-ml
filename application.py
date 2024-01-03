@@ -1,54 +1,70 @@
 import streamlit as st
 import pandas as pd
-from mlxtend.frequent_patterns import apriori
-from mlxtend.frequent_patterns import association_rules
-from scipy.sparse import csr_matrix
+from mlxtend.frequent_patterns import association_rules, apriori
 
-# Load the dataset
-file_path = "groceries - groceries.csv"
-df = pd.read_csv(file_path)
+df = pd.read_csv("groceries - groceries.csv")
 
-# Apriori Algorithm
-def apply_apriori(df, min_support=0.01, min_confidence=0.5):
-    # Convert the dataset to a one-hot encoded format
-    df_encoded = pd.get_dummies(df.drop('Item(s)', axis=1).astype(str))
+item_columns = df.columns[1:33]
 
-    # Apply the Apriori algorithm
-    frequent_itemsets = apriori(df_encoded.astype(bool), min_support=min_support, use_colnames=True)
+transactions = df[item_columns].apply(lambda row: row.dropna().tolist(), axis=1).tolist()
 
-    # Generate association rules
-    rules = association_rules(frequent_itemsets, metric="confidence", min_threshold=min_confidence)
+onehot_transactions = pd.DataFrame(transactions)
 
-    return frequent_itemsets, rules
+onehot_encoded = pd.get_dummies(onehot_transactions.unstack()).groupby(level=1).max()
 
-# Streamlit app
-st.title("Grocery Items Explorer with Apriori Algorithm")
+st.title("Association rules pada data belanja dengan algoritma Apriori")
 
-# Display the dataset in a table
-st.write("## Raw Dataset")
-st.dataframe(df)
+def user_input_feature():
+    item_list = df['Item 1'].unique().tolist()
+    item = st.selectbox("Item", item_list)
+    return item
 
-# Apply Apriori algorithm
-min_support = st.slider("Select minimum support:", 0.01, 0.5, 0.01, 0.01)
-min_confidence = st.slider("Select minimum confidence:", 0.1, 1.0, 0.5, 0.1)
+item = user_input_feature()
 
-frequent_itemsets, rules = apply_apriori(df, min_support, min_confidence)
 
-# Display frequent itemsets
-st.write("## Frequent Itemsets")
-st.dataframe(frequent_itemsets)
+frequent_itemsets = apriori(onehot_encoded, min_support=0.03, use_colnames=True)
 
-# Display association rules
-st.write("## Association Rules")
+sorted_frequent_itemsets = frequent_itemsets.sort_values(by="support", ascending=False).reset_index(drop=True)
 
-# Allow the user to select antecedents and consequents
-antecedents = st.multiselect("Select antecedents:", df.columns[1:])
-consequents = st.multiselect("Select consequents:", df.columns[1:])
+sorted_frequent_itemsets["length"] = sorted_frequent_itemsets["itemsets"].apply(len)
 
-# Filter rules based on user selection
-filtered_rules = rules[
-    (rules['antecedents'].apply(lambda x: set(antecedents).issubset(set(x)))) &
-    (rules['consequents'].apply(lambda x: set(consequents).issubset(set(x))))
-]
+with pd.option_context("display.max_rows", None,
+                       "display.max_columns", None,
+                       "display.precision", 3,
+                       ):
+  print(sorted_frequent_itemsets)
 
-st.dataframe(filtered_rules)
+support = 0.01
+
+metric = "lift"
+min_treshold = 1
+
+rules = association_rules(frequent_itemsets, metric=metric, min_threshold=min_treshold)[["antecedents", "consequents", "support", "confidence", "lift"]]
+rules.sort_values('confidence', ascending=False, inplace=True)
+
+def parse_list(x):
+    x = list(x)
+    if len(x) == 1:
+        return x[0]
+    elif len(x) > 1:
+        return ", ".join(x)
+
+def return_item_df(item_antecedents):
+    data = rules[["antecedents", "consequents"]].copy()
+
+    data["antecedents"] = data["antecedents"].apply(parse_list)
+    data["consequents"] = data["consequents"].apply(parse_list)
+
+    filtered_data = data.loc[data["antecedents"] == item_antecedents]
+
+    if not filtered_data.empty:
+        return list(filtered_data.iloc[0, :])
+    else:
+        return []
+
+    st.markdown("Hasil Rekomendasi : ")
+    result = return_item_df(item)
+    if result :
+        st.success(f"Jika Konsumen Membeli **{item}**, maka membeli **{return_item_df(item)[1]}** secara bersamaan")
+    else:
+        st.warning("Tidak ditemukan rekomendasi untuk item yang dipilih")
