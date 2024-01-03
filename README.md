@@ -5,30 +5,29 @@
 
 ## Domain Proyek
 
-Proyek ini memudahkan pengggunanya untuk melihat estimasi harga ponsel berdasarkan spesifikasi yang di inginkan, sehingga bisa menjadi acuan untuk dana yang harus di siapkan
+The Groceries Market Basket Dataset, yang dapat ditemukan di sini. Dataset ini berisi 9835 transaksi oleh pelanggan yang berbelanja kebutuhan. Data ini mencakup 169 item unik.
+Data ini cocok untuk melakukan penambangan data untuk analisis keranjang pasar yang memiliki beberapa variabel
 
 
 ## Business Understanding
 
-Dengan adanya apliakasi ini, memudahkan penggunanya untuk menyiapkan dana guna mendapat ponsel dengan spesifikasi yang di inginkan dengan cara mengkalkulasikan estimasi nya menggunakan regresi linear
-
-Bagian laporan ini mencakup:
+Dalam bidang keilmuan data mining, terdapat suatu metode yang dinamakan association rule. Metode ini bertujuan untuk menunjukkan nilai asosiatif antara jenis-jenis produk yang dibeli oleh pelanggan sehingga terlihatlah suatu pola berupa produk apa saja yang sering dibeli oleh palanggan tersebut.
 
 ### Problem Statements
 
-Sering kali kita tertipu sales ponsel yang menjual ponsel dengan harga tidak masuk akal tapi spesifikasi dipertanyakan
+Melalui analisis dataset, kita akan menjelajahi pola pembelian pelanggan, mengidentifikasi item yang sering muncul bersama, dan mengungkap asosiasi yang dapat memberikan wawasan bisnis dan mendukung pengambilan keputusan.
 
 ### Goals
 
-Dengan adanya model machine learning ini di harapkan kita terhindar dari hal tersebut karena sudah punya patokan untuk harga nya berdsasarkan rincian spesifikasinya.
+Dengan adanya model machine learning ini di harapkan pelaku usaha lebih mudah dalam menentukan paket penjualan item, diskon dan stok barang yang di dasarkan pada kebiasaan pembelian customer
 
   ### Solution statements
-  - Untuk pemodelan estimasi, digunakan algoritma regresi linear
-  - Proses pengkalkulasian di lakukan berdasarkan estimasi data yang di sajikan berdasarkan rincian spesifikasinya
+  - Menganalisis pola pembelian pelanggan dan mengidentifikasi item yang sering muncul bersama.
+  - Mengungkap asosiasi yang kuat antara item untuk mendukung peluang penjualan lintas produk.
+  - Mengoptimalkan strategi pemasaran berdasarkan pola dan asosiasi yang ditemukan.
 
 ## Data Understanding
-Proyek ini didasarkan pada dataset yang diambil dari kaggle perihal estimasi harga ponsel berdasarkan rincian spesifikasinya. Untuk dataset nya bisa di ambil disini<br>
-
+Dataset yang digunakan dalam analisis ini terdiri dari 9835 transaksi yang mencerminkan perilaku belanja pelanggan untuk kebutuhan kelontong. Ini mencakup sejumlah item kelontong, dengan total 169 item unik yang tercakup. Data ini merekam catatan transaksi pelanggan yang berbelanja kebutuhan kelontong, dan setiap baris sesuai dengan satu transaksi. Dataset ini memiliki total 33 kolom. Kolom "Item(s)" menunjukkan jumlah item yang dibeli dalam setiap transaksi, sementara kolom-kolom berikutnya, dari "Item 1" hingga "Item 32," mencantumkan item-individu yang dibeli dalam transaksi tersebut.
 [Groceries Market Basket Dataset](https://www.kaggle.com/datasets/irfanasrullah/groceries).
 
 ### Variabel-variabel pada Mobile Price Prediction Dataset adalah sebagai berikut:
