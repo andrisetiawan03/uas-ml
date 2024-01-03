@@ -157,5 +157,5 @@ akurasi model regresi linier =  0.9171990085700209
 Diperoleh tingkat akurasinya 91%, untuk model regreai linear saya rasa cocok untuk menggunakan nilai acuan akurasi. Apalagi ketika akurasinya sudah diatas 70%.
 
 ## Deployment
-[Link Streamlit untuk Project UTS](https://estimasiponsel.streamlit.app/)
+[Link Streamlit untuk Project UAS](https://uas-ml-apriori.streamlit.app/)
 ![alt text](https://github.com/andrisetiawan03/uts/blob/main/tampilan.png)
