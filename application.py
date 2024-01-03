@@ -49,6 +49,8 @@ def parse_list(x):
     elif len(x) > 1:
         return ", ".join(x)
 
+# ... (previous code)
+
 def return_item_df(item_antecedents):
     data = rules[["antecedents", "consequents"]].copy()
 
@@ -62,9 +64,11 @@ def return_item_df(item_antecedents):
     else:
         return []
 
-    st.markdown("Hasil Rekomendasi : ")
-    result = return_item_df(item)
-    if result :
-        st.success(f"Jika Konsumen Membeli **{item}**, maka membeli **{return_item_df(item)[1]}** secara bersamaan")
-    else:
-        st.warning("Tidak ditemukan rekomendasi untuk item yang dipilih")
+# Move the indentation of the following block outside the function
+st.markdown("Hasil Rekomendasi : ")
+result = return_item_df(item)
+if result:
+    st.success(f"Jika Konsumen Membeli **{item}**, maka membeli **{return_item_df(item)[1]}** secara bersamaan")
+else:
+    st.warning("Tidak ditemukan rekomendasi untuk item yang dipilih")
+
